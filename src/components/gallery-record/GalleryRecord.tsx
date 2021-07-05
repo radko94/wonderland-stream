@@ -1,18 +1,15 @@
 import React from "react";
-
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@material-ui/core";
+import { lazy } from "react";
 
 import IGalleryRecord from "../../models/gallery-record";
 import galleryRecordStyles from "./GalleryRecordStyles";
 
-const GalleryRecord = (props: {
-  record: IGalleryRecord;
-}) => {
+const Card = lazy(() => import("@material-ui/core/Card"));
+const CardContent = lazy(() => import("@material-ui/core/CardContent"));
+const CardMedia = lazy(() => import("@material-ui/core/CardMedia"));
+const Typography = lazy(() => import("@material-ui/core/Typography"));
+
+const GalleryRecord = (props: { record: IGalleryRecord }) => {
   const classes = galleryRecordStyles();
 
   const extractUsername = (username: string): string => {
@@ -39,12 +36,12 @@ const GalleryRecord = (props: {
         title={props.record.title}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2" className={classes.topography}>
+        <Typography gutterBottom variant="h5" className={classes.topography}>
           <a href={props.record.link} className={classes.title}>
             {modifyTitle(props.record.title)}
           </a>
         </Typography>
-        <Typography gutterBottom variant="h6" component="h3" className={classes.topography}>
+        <Typography gutterBottom variant="h6" className={classes.topography}>
           by{" "}
           <a href={`https://www.flickr.com/photos/${props.record.author_id}`}>
             {extractUsername(props.record.author)}
@@ -53,7 +50,6 @@ const GalleryRecord = (props: {
         <Typography
           variant="body2"
           color="textSecondary"
-          component="p"
           className={classes.description}
         >
           Some Description
@@ -61,7 +57,6 @@ const GalleryRecord = (props: {
         <Typography
           variant="body2"
           color="textSecondary"
-          component="p"
           className={classes.tags}
         >
           {props.record.tags}

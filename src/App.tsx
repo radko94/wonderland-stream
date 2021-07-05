@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy } from "react";
 import jsonp from "fetch-jsonp";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import Header from "./components/header/Header";
 import IFlickrResponse from "./models/flickr-response";
 import IGalleryRecord from "./models/gallery-record";
-import GalleryRecord from "./components/gallery-record/GalleryRecord";
 import appStyles from "./AppStyles";
+
+const GalleryRecord = lazy(
+  () => import("./components/gallery-record/GalleryRecord")
+);
+const Header = lazy(() => import("./components/header/Header"));
 
 const App = () => {
   const classes = appStyles();

@@ -1,14 +1,12 @@
-import {
-  AppBar,
-  IconButton,
-  InputBase,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
-
-import { Search as SearchIcon, Menu as MenuIcon } from "@material-ui/icons";
+import React, { lazy } from "react";
 
 import headerStyles from "./HeaderStyles";
+
+const SearchIcon = lazy(() => import("@material-ui/icons/Search"));
+const AppBar = lazy(() => import("@material-ui/core/AppBar"));
+const InputBase = lazy(() => import("@material-ui/core/InputBase"));
+const Toolbar = lazy(() => import("@material-ui/core/Toolbar"));
+const Typography = lazy(() => import("@material-ui/core/Typography"));
 
 const Header = (props: {
   filterFn: (searchStr: string) => void;
