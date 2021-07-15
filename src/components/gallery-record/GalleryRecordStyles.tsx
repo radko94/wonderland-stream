@@ -21,6 +21,10 @@ const galleryRecordStyles = makeStyles((theme) => ({
   topography: {
     fontFamily: "Alfa Slab One",
   },
+  likes: {
+    fontFamily: "Alfa Slab One",
+    color: "rgba(0, 0, 0, 0.74)",
+  },
   description: {
     margin: "15px 0",
     fontFamily: "Alfa Slab One",
@@ -39,6 +43,10 @@ const galleryRecordStyles = makeStyles((theme) => ({
     WebkitBoxOrient: "vertical",
     overflow: "hidden",
     fontFamily: "Alfa Slab One",
+  },
+  cardActions: {
+    display: "flex",
+    justifyContent: "flex-end",
   },
 }));
 export default galleryRecordStyles;

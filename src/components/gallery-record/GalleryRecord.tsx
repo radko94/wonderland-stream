@@ -1,4 +1,6 @@
+import { Button, CardActions } from "@material-ui/core";
 import React from "react";
+import { useState } from "react";
 import { lazy } from "react";
 
 import IGalleryRecord from "../../models/gallery-record";
@@ -10,6 +12,8 @@ const CardMedia = lazy(() => import("@material-ui/core/CardMedia"));
 const Typography = lazy(() => import("@material-ui/core/Typography"));
 
 const GalleryRecord = (props: { record: IGalleryRecord }) => {
+  const [recordLikes, setRecordLikes] = useState(props.record.liked);
+
   const classes = galleryRecordStyles();
 
   const extractUsername = (username: string): string => {
@@ -27,6 +31,8 @@ const GalleryRecord = (props: { record: IGalleryRecord }) => {
 
     return title;
   };
+
+  const addLike = (): void => setRecordLikes(recordLikes + 1);
 
   return (
     <Card className={classes.root}>
@@ -47,6 +53,9 @@ const GalleryRecord = (props: { record: IGalleryRecord }) => {
             {extractUsername(props.record.author)}
           </a>
         </Typography>
+        <Typography gutterBottom className={classes.likes}>
+          Likes: {recordLikes}
+        </Typography>
         <Typography
           variant="body2"
           color="textSecondary"
@@ -62,6 +71,9 @@ const GalleryRecord = (props: { record: IGalleryRecord }) => {
           {props.record.tags}
         </Typography>
       </CardContent>
+      <CardActions className={classes.cardActions}>
+        <Button size="medium" onClick={addLike}>Learn More</Button>
+      </CardActions>
     </Card>
   );
 };

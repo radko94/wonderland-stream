@@ -10,4 +10,5 @@ export default interface IGalleryRecord {
   published: string;
   tags: string;
   title: string;
+  liked: number;
 }

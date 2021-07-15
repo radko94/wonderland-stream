@@ -30,7 +30,10 @@ const App = () => {
     )
       .then((flikrResponse) => flikrResponse.json())
       .then((flikrResponseJson: IFlickrResponse) => {
-        setElements([...elements, ...flikrResponseJson.items]);
+
+        const items: IGalleryRecord[] = flikrResponseJson.items;
+        const modifiedItems = items.map(element => ({...element, liked: Math.floor(Math.random() * 100)}))
+        setElements([...elements, ...modifiedItems]);
       });
   };
 

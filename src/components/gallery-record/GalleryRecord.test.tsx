@@ -1,7 +1,14 @@
 import React, { Suspense } from "react";
+import ReactDom from "react-dom";
 import IGalleryRecord from "../../models/gallery-record";
 
-import { render, cleanup, waitFor } from "@testing-library/react";
+import {
+  render,
+  cleanup,
+  waitFor,
+  fireEvent,
+  getByText,
+} from "@testing-library/react";
 
 import GalleryRecord from "./GalleryRecord";
 
@@ -21,6 +28,7 @@ describe("Gallery record", () => {
       author: 'nobody@flickr.com ("Pumpkin\'s Belly")',
       author_id: "43121659@N06",
       tags: "",
+      liked: Math.floor(Math.random() * 100),
     };
 
     const component = render(
@@ -35,7 +43,7 @@ describe("Gallery record", () => {
     });
   });
 
-  it("should have a title", async () => {
+  it("should have a title", async (done) => {
     const record: IGalleryRecord = {
       title: "Formby & Crosby 30062021",
       link: "https://www.flickr.com/photos/43121659@N06/51291415182/",
@@ -49,16 +57,24 @@ describe("Gallery record", () => {
       author: 'nobody@flickr.com ("Pumpkin\'s Belly")',
       author_id: "43121659@N06",
       tags: "",
+      liked: Math.floor(Math.random() * 100),
     };
 
-    const component = render(
+    function addLike() {
+      done();
+    }
+    const { getByText } = render(
       <Suspense fallback={<h1>loading....</h1>}>
         <GalleryRecord record={record}></GalleryRecord>
       </Suspense>
     );
+    const node = getByText("Click Me");
+    fireEvent.click(node);
 
-    await waitFor(() => {
-      expect(component.queryByText(record.title)).toBeInTheDocument();
-    });
+    expect(addLike).toBeCalled();
+
+    // await waitFor(() => {
+    //   expect(component.queryByText(record.title)).toBeInTheDocument();
+    // });
   });
 });
